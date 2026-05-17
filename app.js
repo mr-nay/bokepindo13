@@ -88,7 +88,7 @@ async function initHomepage() {
         allVideos = videos.filter(Boolean);
 
         // JIKA API GAGAL
-        if (allVideos.length === 0) {
+        if (!allVideos || allVideos.length < 1) { 
 
             videoGrid.innerHTML = `
                 <div class="col-12">
