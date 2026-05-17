@@ -146,9 +146,20 @@
     <!-- App Scripts -->
 <script src="./api.js"></script>
 <script src="./app.js"></script>
-    <script>fetch("https://api.jejaring.cc/videos.php?id=zV1y3efjEP")
-  .then(res => res.text())
-  .then(data => alert(data));
+<script>
+fetch("https://api.jejaring.cc/videos.php?id=zV1y3efjEP")
+  .then(res => {
+    console.log("status:", res.status);
+    return res.text();
+  })
+  .then(data => {
+    console.log("data:", data);
+    alert(data);
+  })
+  .catch(err => {
+    console.error("FETCH ERROR:", err);
+    alert("ERROR: " + err.message);
+  });
 </script>
 </body>
 </html>
