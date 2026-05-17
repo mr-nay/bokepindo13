@@ -111,25 +111,14 @@ async function fetchVideo(videoId) {
  */
 async function fetchMultipleVideos(ids = VIDEO_IDS) {
 
-    try {
+    const results = await Promise.allSettled(
+        ids.map(id => fetchVideo(id))
+    );
 
-        const promises = ids.map(id => fetchVideo(id));
-
-        const results = await Promise.all(promises);
-
-        return results.filter(Boolean);
-
-    } catch (error) {
-
-        console.error(
-            'Failed fetching multiple videos:',
-            error
-        );
-
-        return [];
-    }
+    return results
+        .map(r => r.status === 'fulfilled' ? r.value : null)
+        .filter(v => v !== null);
 }
-
 /**
  * Get all video IDs
  * @returns {string[]}
