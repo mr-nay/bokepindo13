@@ -1,165 +1,110 @@
 <!DOCTYPE html>
-<html lang="id" data-theme="dark">
+<html lang="id" data-bs-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StreamBox - Streaming Video Terbaik</title>
-    <meta name="description" content="StreamBox - Platform streaming video terbaik dengan koleksi film dan video berkualitas tinggi. Tonton gratis tanpa batas.">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <link rel="canonical" href="https://streambox.pages.dev/">
-    
-    <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="StreamBox - Streaming Video Terbaik">
-    <meta property="og:description" content="Platform streaming video terbaik dengan koleksi film dan video berkualitas tinggi.">
-    <meta property="og:url" content="https://streambox.pages.dev/">
-    <meta property="og:site_name" content="StreamBox">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="StreamBox - Streaming Video Terbaik">
-    <meta name="twitter:description" content="Platform streaming video terbaik dengan koleksi film dan video berkualitas tinggi.">
-    
-    <!-- Favicon -->
-    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon_atoms.ico" type="image/x-icon">
-    
-    <!-- Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="./style.css">
-
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "StreamBox",
-        "url": "https://streambox.pages.dev/",
-        "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://streambox.pages.dev/?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-        }
-    }
-    </script>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [{
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Beranda",
-            "item": "https://streambox.pages.dev/"
-        }]
-    }
-    </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nonton Video Streaming Terbaru dan Terupdate 2025">
+  <title>StreamBox - Video Streaming</title>
+  <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon_atoms.ico" type="image/x-icon">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.8/css/line.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg sticky-top" id="mainNavbar">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <i class="bi bi-play-circle-fill me-2"></i>StreamBox
-            </a>
-            <div class="d-flex align-items-center gap-2">
-                <button class="btn btn-sm theme-toggle-btn" id="themeToggle" aria-label="Toggle theme">
-                    <span id="themeIcon">🌙</span>
-                </button>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            </div>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.html">Beranda</a>
-                    </li>
-                </ul>
-                <div class="ms-lg-3 mt-2 mt-lg-0">
-                    <div class="input-group search-box">
-                        <input type="text" class="form-control" id="searchInput" placeholder="Cari video..." aria-label="Search">
-                        <button class="btn btn-accent" id="searchBtn" type="button">
-                            <i class="bi bi-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+  <!-- Overlay -->
+  <div class="screen-overlay" id="screenOverlay"></div>
 
-    <!-- Banner Ad -->
-    <section class="container mt-3">
-        <div class="ad-banner text-center" id="topBanner">
-            <div class="ad-placeholder">
-                <span>Advertisement</span>
-            </div>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="sidebar-logo">
+          <i class="fa-solid fa-circle-play"></i>
+          <span>StreamBox</span>
+        </a>
+        <button class="sidebar-close" id="sidebarClose">
+          <i class="uil uil-times"></i>
+        </button>
+      </div>
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <a href="/" class="nav-link"><i class="uil uil-estate"></i> Home</a>
         </div>
-    </section>
-
-    <!-- Pinned Post -->
-    <section class="container mt-4" id="pinnedSection">
-        <h2 class="section-title"><i class="bi bi-pin-angle-fill me-2"></i>Video Pilihan</h2>
-        <div class="row" id="pinnedPost"></div>
-    </section>
+        <div class="sidebar-separator"></div>
+        <div class="nav-section">
+          <div class="nav-title">Categories</div>
+          <a href="/categories.html?category=sapi+Indo" class="nav-link"><i class="uil uil-video"></i> Sapi INDO</a>
+          <a href="/categories.html?category=sapi+ABG" class="nav-link"><i class="uil uil-video"></i> Sapi ABG</a>
+          <a href="/categories.html?category=sapi+SMP" class="nav-link"><i class="uil uil-video"></i> Sapi SMP</a>
+          <a href="/categories.html?category=sapi+Perawan" class="nav-link"><i class="uil uil-video"></i> Sapi PERAWAN</a>
+          <a href="/categories.html?category=sapi+Viral" class="nav-link"><i class="uil uil-video"></i> Sapi VIRAL</a>
+          <a href="/categories.html?category=sapi+ASD" class="nav-link"><i class="uil uil-video"></i> Sapi ASIA</a>
+        </div>
+        <div class="sidebar-separator"></div>
+        <div class="nav-section">
+          <div class="nav-title">More</div>
+          <a href="/categories.html" class="nav-link"><i class="uil uil-list-ul"></i> All Categories</a>
+          <a href="/about.html" class="nav-link"><i class="uil uil-info-circle"></i> About Us</a>
+        </div>
+      </nav>
+    </aside>
 
     <!-- Main Content -->
-    <main class="container mt-4">
-        <h1 class="section-title"><i class="bi bi-fire me-2"></i>Video Terbaru</h1>
-        <div class="row g-3" id="videoGrid"></div>
-        
-        <!-- Pagination -->
-        <nav class="mt-4 mb-4" aria-label="Page navigation">
-            <ul class="pagination justify-content-center" id="pagination"></ul>
-        </nav>
-    </main>
-
-    <!-- Footer -->
-    <footer class="site-footer mt-5" id="mainFooter">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6">
-                    <h5 class="fw-bold"><i class="bi bi-play-circle-fill me-2"></i>StreamBox</h5>
-                    <p class="text-muted-custom">Platform streaming video terbaik dengan koleksi film dan video berkualitas tinggi. Tonton gratis tanpa batas.</p>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="fw-bold">Navigasi</h6>
-                    <ul class="list-unstyled">
-                        <li><a href="index.html" class="footer-link">Beranda</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-3">
-                    <h6 class="fw-bold">Info</h6>
-                    <ul class="list-unstyled">
-                        <li class="text-muted-custom">Hosted on Cloudflare Pages</li>
-                        <li class="text-muted-custom">&copy; 2026 StreamBox</li>
-                    </ul>
-                </div>
-            </div>
+    <div class="main-content" id="mainContent">
+      <!-- Top Navbar -->
+      <nav class="top-navbar">
+        <div class="nav-left">
+          <button class="menu-toggle" id="menuToggle">
+            <i class="uil uil-bars"></i>
+          </button>
+          <a href="/" class="sidebar-logo d-lg-none">
+            <i class="fa-solid fa-circle-play"></i>
+            <span>StreamBox</span>
+          </a>
         </div>
-    </footer>
+        <form class="search-form" id="searchForm">
+          <input type="search" name="q" placeholder="Search videos..." autocomplete="off" required>
+          <button type="submit"><i class="uil uil-search"></i></button>
+        </form>
+      </nav>
 
-    <!-- Bootstrap 5 JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- App Scripts -->
-<script src="./api.js"></script>
-<script src="./app.js"></script>
-<script>
-const xhr = new XMLHttpRequest();
+      <!-- Content Area -->
+      <div class="content-area">
+        <!-- Category Bar -->
+        <div class="category-bar">
+          <a href="/" class="category-btn active">All</a>
+          <a href="/categories.html?category=sapi+Indo" class="category-btn">Sapi INDO</a>
+          <a href="/categories.html?category=sapi+ABG" class="category-btn">Sapi ABG</a>
+          <a href="/categories.html?category=sapi+SMP" class="category-btn">Sapi SMP</a>
+          <a href="/categories.html?category=sapi+Viral" class="category-btn">Sapi VIRAL</a>
+          <a href="/categories.html?category=sapi+Artis" class="category-btn">Sapi ARTIS</a>
+          <a href="/categories.html?category=sapi+Perawan" class="category-btn">Sapi PERAWAN</a>
+          <a href="/categories.html?category=sapi+Tante" class="category-btn">Sapi TANTE</a>
+          <a href="/categories.html?category=sapi+ASD" class="category-btn">Sapi ASIA</a>
+          <a href="/categories.html" class="category-btn">KATEGORI</a>
+        </div>
 
-xhr.open("GET", "https://api.jejaring.cc/videos.php?id=zV1y3efjEP");
+        <!-- Hero Slider -->
+        <div class="hero-slider">
+          <div class="swiper" id="heroSwiper">
+            <div class="swiper-wrapper" id="sliderWrapper">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
 
-xhr.onload = function () {
-    console.log(xhr.responseText);
-};
+        <!-- Video Sections -->
+        <div id="videoSections">
+          <div class="loading-spinner" id="loadingSpinner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-xhr.onerror = function () {
-    alert("error");
-};
-
-xhr.send();
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
