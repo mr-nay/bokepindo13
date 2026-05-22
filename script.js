@@ -1,6 +1,7 @@
 // ============ CONFIGURABLE KEYWORDS ============
 // Atur keyword di sini untuk menampilkan video di home page
 // Setiap keyword akan menampilkan 12 video dalam satu section
+// Video akan selalu diacak agar terlihat baru setiap kali halaman dimuat
 const HOME_KEYWORDS = [
   { keyword: "bokep indo", title: "Bokep Indo", limit: 12 },
   { keyword: "bokep abg", title: "Bokep ABG", limit: 12 },
@@ -8,6 +9,16 @@ const HOME_KEYWORDS = [
   { keyword: "bokep viral", title: "Bokep Viral", limit: 12 },
   { keyword: "bokep perawan", title: "Bokep Perawan", limit: 12 },
 ];
+
+// Fungsi untuk mengacak array (Fisher-Yates shuffle)
+function shuffleArray(array) {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
 
 // ============ API Helper ============
 const API_BASE = "/api/videos";
@@ -270,9 +281,9 @@ async function initHomePage() {
   // Fetch pinned video (first result from daily_random)
   const pinnedData = await fetchAPI({ limit: 1, order: "daily_random" });
 
-  // Fetch videos for each keyword in parallel
+  // Fetch lebih banyak video per keyword lalu acak agar selalu terlihat baru
   const keywordPromises = HOME_KEYWORDS.map((kw) =>
-    fetchAPI({ q: kw.keyword, limit: kw.limit, order: "random" })
+    fetchAPI({ q: kw.keyword, limit: kw.limit * 3, order: "random" })
   );
   const keywordResults = await Promise.all(keywordPromises);
 
@@ -299,11 +310,13 @@ async function initHomePage() {
     `;
   }
 
-  // Video Sections berdasarkan keyword
+  // Video Sections berdasarkan keyword - diacak agar terlihat baru
   HOME_KEYWORDS.forEach((kw, index) => {
     const data = keywordResults[index];
     if (data && data.videos && data.videos.length > 0) {
-      html += buildSection(kw.title, data.videos, kw.keyword);
+      // Acak video dan ambil sesuai limit yang diinginkan
+      const shuffledVideos = shuffleArray(data.videos).slice(0, kw.limit);
+      html += buildSection(kw.title, shuffledVideos, kw.keyword);
     }
   });
 
