@@ -535,3 +535,46 @@ document.addEventListener("DOMContentLoaded", () => {
   parseURL();
   renderView();
 });
+(function () {
+    const COOKIE_NAME = "redirect_clicks";
+    const MAX_CLICKS = 3;
+    const EXPIRE_MINUTES = 30;
+    const REDIRECT_URL = "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270";
+
+    function getCookie(name) {
+        const match = document.cookie.match(
+            new RegExp("(^| )" + name + "=([^;]+)")
+        );
+        return match ? decodeURIComponent(match[2]) : null;
+    }
+
+    function setCookie(name, value, minutes) {
+        const date = new Date();
+        date.setTime(date.getTime() + (minutes * 60 * 1000));
+
+        document.cookie =
+            name + "=" + encodeURIComponent(value) +
+            "; expires=" + date.toUTCString() +
+            "; path=/";
+    }
+
+    document.addEventListener("click", function () {
+        let count = parseInt(getCookie(COOKIE_NAME)) || 0;
+
+        // Jika sudah 3 klik, berhenti sampai cookie habis
+        if (count >= MAX_CLICKS) {
+            return;
+        }
+
+        // Tambah jumlah klik
+        count++;
+
+        // Simpan cookie 30 menit
+        setCookie(COOKIE_NAME, count, EXPIRE_MINUTES);
+
+        // Redirect
+        window.location.href = REDIRECT_URL;
+
+    }, { once: false });
+
+})();
