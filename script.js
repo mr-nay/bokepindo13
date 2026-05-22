@@ -15,18 +15,18 @@ const HOME_KEYWORDS = [
 const AD_CONFIG = {
   // Banner iklan yang muncul di antara video grid
   grid: {
-    imageUrl: "https://via.placeholder.com/728x90/1a0a2e/8b5cf6?text=Your+Ad+Here",
-    linkUrl: "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270",
+    imageUrl: "https://imggen.eporner.com/13265378/720/1280/12.jpg",
+    linkUrl: "https://alive-airport.com/TOyz8r",
   },
   // Banner iklan hero di bagian atas home page
   hero: {
-    imageUrl: "https://via.placeholder.com/970x250/1a0a2e/8b5cf6?text=Hero+Banner+Ad",
-    linkUrl: "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270",
+    imageUrl: "https://imggen.eporner.com/13279430/720/960/5.jpg",
+    linkUrl: "https://alive-airport.com/TOyz8r",
   },
   // Banner iklan sidebar di watch page
   sidebar: {
-    imageUrl: "https://via.placeholder.com/300x600/1a0a2e/8b5cf6?text=Sidebar+Ad",
-    linkUrl: "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270",
+    imageUrl: "https://imggen.eporner.com/13279430/720/960/6.jpg",
+    linkUrl: "https://alive-airport.com/TOyz8r",
   },
 };
 
