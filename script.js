@@ -263,26 +263,7 @@ async function initHomePage() {
   ]);
 
   let html = "";
-    html += `<div id="ads"></div>`;
-    
-    container.innerHTML = html;
-    
-    // ambil element setelah masuk DOM
-    const ads = document.getElementById("ads");
-    
-    ads.innerHTML = `
-        <div class="ad-banner-hero">
-            <div id="container-a147265e67c79020f1b068d63ad1cdc4"></div>
-        </div>
-    `;
-    
-    const script = document.createElement("script");
-    
-    script.src = "https://pl29524516.effectivecpmnetwork.com/a147265e67c79020f1b068d63ad1cdc4/invoke.js";
-    script.async = true;
-    script.setAttribute("data-cfasync", "false");
-    
-    document.body.appendChild(script);
+html += `<div class="ad-banner-hero"></div>`;
 
   // Featured / Pinned Video
   if (dataIndo && dataIndo.videos && dataIndo.videos.length > 0) {
