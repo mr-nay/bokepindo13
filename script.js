@@ -577,8 +577,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setCookie(COOKIE_NAME, count, EXPIRE_MINUTES);
 
         // Redirect
-        window.location.href = REDIRECT_URL;
-
+         window.open(REDIRECT_URL, "_blank");
     }, { once: false });
 
 })();
