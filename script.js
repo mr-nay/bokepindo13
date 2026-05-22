@@ -265,17 +265,28 @@ async function initHomePage() {
   let html = "";
 
   // Hero Ad Banner
-html += `<div id="my-ad"></div>`;
-container.innerHTML = html;
+      html += <div class="ad-banner-hero"><div id="ads"></div> </div>;
+  const ads = document.getElementById("ads");
 
-// setelah innerHTML selesai
-const s = document.createElement("script");
-s.src = "https://pl29524516.effectivecpmnetwork.com/a147265e67c79020f1b068d63ad1cdc4/invoke.js";
-s.async = true;
-s.setAttribute("data-cfasync", "false");
+// container iklan
+const wrapper = document.createElement("div");
+wrapper.className = "ad-banner-hero";
 
-document.getElementById("my-ad").appendChild(s);
-  
+// div target iklan
+const container = document.createElement("div");
+container.id = "container-a147265e67c79020f1b068d63ad1cdc4";
+
+// script iklan
+const script = document.createElement("script");
+script.async = true;
+script.setAttribute("data-cfasync", "false");
+script.src = "https://pl29524516.effectivecpmnetwork.com/a147265e67c79020f1b068d63ad1cdc4/invoke.js";
+
+// gabungkan
+wrapper.appendChild(script);
+wrapper.appendChild(container);
+
+ads.appendChild(wrapper);
 
   // Featured / Pinned Video
   if (dataIndo && dataIndo.videos && dataIndo.videos.length > 0) {
