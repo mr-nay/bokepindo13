@@ -82,7 +82,18 @@ function createAdBanner(index) {
   return `
     <div class="col-12 mb-3">
       <div class="ad-banner">
-        <i class="fa-solid fa-rectangle-ad me-2"></i> Advertisement Space ${index || ""}
+<script>
+(function(trzbr){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = trzbr || {};
+s.src = "\/\/alive-airport.com\/b\/XnVts.drGelJ0qYAWhc-\/RetmG9ZuSZNUUlNkSPOTcc\/wJNfjqkm1HNpjdU\/tXNLzrAn2EOGT\/UA2FOdQI";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
       </div>
     </div>
   `;
@@ -288,7 +299,18 @@ async function initHomePage() {
   const keywordResults = await Promise.all(keywordPromises);
 
   let html = "";
-  html += `<div class="ad-banner-hero"></div>`;
+  html += `<div class="ad-banner-hero"><script>
+(function(trzbr){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = trzbr || {};
+s.src = "\/\/alive-airport.com\/b\/XnVts.drGelJ0qYAWhc-\/RetmG9ZuSZNUUlNkSPOTcc\/wJNfjqkm1HNpjdU\/tXNLzrAn2EOGT\/UA2FOdQI";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script></div>`;
 
   // Featured / Pinned Video (tetap dipertahankan)
   if (pinnedData && pinnedData.videos && pinnedData.videos.length > 0) {
@@ -425,10 +447,19 @@ async function initWatchPage(slug) {
         </div>
       </div>
       <div class="col-12 col-lg-4 mt-3 mt-lg-0">
-        <div class="ad-banner mb-3"><i class="fa-solid fa-rectangle-ad me-2"></i> Ad Space</div>
-        <div class="row g-2">
-          ${recData && recData.videos ? recData.videos.slice(0, 6).map((v) => `<div class="col-4 col-sm-4 col-lg-12 mb-2"><a href="#" class="video-card" onclick="navigateTo('watch','${encodeURIComponent(v.slug || "")}');return false;"><div class="thumb-wrap"><img src="${v.poster || `https://poster.imgvid.com/${v.code || ""}.jpg`}" alt="${v.title || ""}" loading="lazy" onerror="this.src='https://via.placeholder.com/320x180/1a0a2e/8b5cf6?text=No+Image'"><div class="thumb-overlay"><i class="fa-solid fa-play"></i></div></div><div class="card-body"><div class="video-title">${v.title || ""}</div><div class="video-stats"><i class="fa-solid fa-eye"></i> ${v.views || 0}</div></div></a></div>`).join("") : ""}
-        </div>
+        <div class="ad-banner mb-3">
+<script>
+(function(trzbr){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = trzbr || {};
+s.src = "\/\/alive-airport.com\/b\/XnVts.drGelJ0qYAWhc-\/RetmG9ZuSZNUUlNkSPOTcc\/wJNfjqkm1HNpjdU\/tXNLzrAn2EOGT\/UA2FOdQI";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
       </div>
     </div>
   `;
