@@ -481,7 +481,9 @@ async function initSearchPage(query, page) {
   if (data.videos.length === 0) {
     html += '<p class="text-center py-5" style="color:var(--text-muted);">No videos found.</p>';
   } else {
-    html += `<div class="row g-2 g-md-3">${injectAdsInGrid(data.videos)}</div>`;
+    html += `<div class="row g-2 g-md-3"><script async="async" data-cfasync="false" src="https://pl29524516.effectivecpmnetwork.com/a147265e67c79020f1b068d63ad1cdc4/invoke.js"></script>
+<div id="container-a147265e67c79020f1b068d63ad1cdc4"></div>
+</div>`;
     html += createPagination(currentPage, totalPages, "window._searchPage");
   }
 
