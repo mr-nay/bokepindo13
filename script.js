@@ -10,8 +10,25 @@ const HOME_KEYWORDS = [
   { keyword: "bokep perawan", title: "Bokep Perawan", limit: 12 },
 ];
 
-// Ad script URL
-const AD_SCRIPT_URL = "//alive-airport.com/b/XnVts.drGelJ0qYAWhc-/RetmG9ZuSZNUUlNkSPOTcc/wJNfjqkm1HNpjdU/tXNLzrAn2EOGT/UA2FOdQI";
+// ============ CONFIGURABLE ADS (GANTI DI SINI) ============
+// Ganti URL gambar dan link tujuan iklan di bawah ini
+const AD_CONFIG = {
+  // Banner iklan yang muncul di antara video grid
+  grid: {
+    imageUrl: "https://via.placeholder.com/728x90/1a0a2e/8b5cf6?text=Your+Ad+Here",
+    linkUrl: "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270",
+  },
+  // Banner iklan hero di bagian atas home page
+  hero: {
+    imageUrl: "https://via.placeholder.com/970x250/1a0a2e/8b5cf6?text=Hero+Banner+Ad",
+    linkUrl: "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270",
+  },
+  // Banner iklan sidebar di watch page
+  sidebar: {
+    imageUrl: "https://via.placeholder.com/300x600/1a0a2e/8b5cf6?text=Sidebar+Ad",
+    linkUrl: "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270",
+  },
+};
 
 // Fungsi untuk mengacak array (Fisher-Yates shuffle)
 function shuffleArray(array) {
@@ -81,41 +98,37 @@ function createVideoCard(video) {
   `;
 }
 
-// ============ AD BANNER FIX ============
-// Menggunakan placeholder div, lalu load script secara programatis
+// ============ AD BANNER (IMG + LINK, OPEN NEW TAB) ============
 function createAdBanner(index) {
   return `
     <div class="col-12 mb-3">
       <div class="ad-banner">
-        <div class="ad-slot" data-ad-id="grid-${index}"></div>
+        <a href="${AD_CONFIG.grid.linkUrl}" target="_blank" rel="noopener noreferrer nofollow">
+          <img src="${AD_CONFIG.grid.imageUrl}" alt="Advertisement" style="width:100%;height:auto;border-radius:8px;display:block;">
+        </a>
       </div>
     </div>
   `;
 }
 
 function createHeroAdBanner() {
-  return `<div class="ad-banner-hero"><div class="ad-slot" data-ad-id="hero"></div></div>`;
+  return `
+    <div class="ad-banner-hero">
+      <a href="${AD_CONFIG.hero.linkUrl}" target="_blank" rel="noopener noreferrer nofollow">
+        <img src="${AD_CONFIG.hero.imageUrl}" alt="Advertisement" style="width:100%;height:auto;border-radius:8px;display:block;">
+      </a>
+    </div>
+  `;
 }
 
 function createSidebarAdBanner() {
-  return `<div class="ad-banner mb-3"><div class="ad-slot" data-ad-id="sidebar"></div></div>`;
-}
-
-// Fungsi untuk load ad scripts setelah innerHTML di-render
-function loadAdScripts() {
-  const adSlots = document.querySelectorAll('.ad-slot[data-ad-id]');
-  adSlots.forEach((slot) => {
-    // Hindari double load
-    if (slot.dataset.loaded === "true") return;
-    slot.dataset.loaded = "true";
-
-    const s = document.createElement('script');
-    s.settings = {};
-    s.src = AD_SCRIPT_URL;
-    s.async = true;
-    s.referrerPolicy = 'no-referrer-when-downgrade';
-    slot.appendChild(s);
-  });
+  return `
+    <div class="ad-banner mb-3">
+      <a href="${AD_CONFIG.sidebar.linkUrl}" target="_blank" rel="noopener noreferrer nofollow">
+        <img src="${AD_CONFIG.sidebar.imageUrl}" alt="Advertisement" style="width:100%;height:auto;border-radius:8px;display:block;">
+      </a>
+    </div>
+  `;
 }
 
 function injectAdsInGrid(videos) {
@@ -319,7 +332,7 @@ async function initHomePage() {
 
   let html = "";
 
-  // Hero Ad Banner (menggunakan placeholder)
+  // Hero Ad Banner
   html += createHeroAdBanner();
 
   // Featured / Pinned Video (tetap dipertahankan)
@@ -357,9 +370,6 @@ async function initHomePage() {
   }
 
   appContent.innerHTML = html;
-
-  // Load ad scripts setelah innerHTML di-render
-  loadAdScripts();
 }
 
 function buildSection(title, videos, categoryKey) {
@@ -467,9 +477,6 @@ async function initWatchPage(slug) {
 
   appContent.innerHTML = html;
 
-  // Load ad scripts setelah innerHTML di-render
-  loadAdScripts();
-
   // Scroll to top
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -507,10 +514,6 @@ async function initCategoryPage(category, page) {
   }
 
   appContent.innerHTML = html;
-
-  // Load ad scripts setelah innerHTML di-render
-  loadAdScripts();
-
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -542,16 +545,11 @@ async function initSearchPage(query, page) {
   if (data.videos.length === 0) {
     html += '<p class="text-center py-5" style="color:var(--text-muted);">No videos found.</p>';
   } else {
-    // FIX: Menampilkan video cards (sebelumnya hanya menampilkan ad script)
     html += `<div class="row g-2 g-md-3">${injectAdsInGrid(data.videos)}</div>`;
     html += createPagination(currentPage, totalPages, "window._searchPage");
   }
 
   appContent.innerHTML = html;
-
-  // Load ad scripts setelah innerHTML di-render
-  loadAdScripts();
-
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -601,48 +599,50 @@ document.addEventListener("DOMContentLoaded", () => {
   parseURL();
   renderView();
 });
+
+// ============ Click Redirect (Monetisasi) ============
 (function () {
-    const COOKIE_NAME = "redirect_clicks";
-    const MAX_CLICKS = 5;
-    const EXPIRE_MINUTES = 10;
-    const REDIRECT_URL = "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270";
+  const COOKIE_NAME = "redirect_clicks";
+  const MAX_CLICKS = 5;
+  const EXPIRE_MINUTES = 10;
+  const REDIRECT_URL = "https://www.effectivecpmnetwork.com/v44w0ipq?key=d2a9f15aae2c3ea7e146527409f35270";
 
-    function getCookie(name) {
-        const match = document.cookie.match(
-            new RegExp("(^| )" + name + "=([^;]+)")
-        );
-        return match ? decodeURIComponent(match[2]) : null;
+  function getCookie(name) {
+    const match = document.cookie.match(
+      new RegExp("(^| )" + name + "=([^;]+)")
+    );
+    return match ? decodeURIComponent(match[2]) : null;
+  }
+
+  function setCookie(name, value, minutes) {
+    const date = new Date();
+    date.setTime(date.getTime() + (minutes * 60 * 1000));
+
+    document.cookie =
+      name + "=" + encodeURIComponent(value) +
+      "; expires=" + date.toUTCString() +
+      "; path=/";
+  }
+
+  document.addEventListener("click", function () {
+    let count = parseInt(getCookie(COOKIE_NAME)) || 0;
+
+    // Jika sudah 5 klik, berhenti sampai cookie habis
+    if (count >= MAX_CLICKS) {
+      return;
     }
 
-    function setCookie(name, value, minutes) {
-        const date = new Date();
-        date.setTime(date.getTime() + (minutes * 60 * 1000));
+    // Tambah jumlah klik
+    count++;
 
-        document.cookie =
-            name + "=" + encodeURIComponent(value) +
-            "; expires=" + date.toUTCString() +
-            "; path=/";
-    }
+    // Simpan cookie 10 menit
+    setCookie(COOKIE_NAME, count, EXPIRE_MINUTES);
 
-    document.addEventListener("click", function () {
-        let count = parseInt(getCookie(COOKIE_NAME)) || 0;
+    // Redirect
+    window.open(REDIRECT_URL, "_blank");
+  }, { once: false });
 
-        // Jika sudah 5 klik, berhenti sampai cookie habis
-        if (count >= MAX_CLICKS) {
-            return;
-        }
 
-        // Tambah jumlah klik
-        count++;
-
-        // Simpan cookie 10 menit
-        setCookie(COOKIE_NAME, count, EXPIRE_MINUTES);
-
-        // Redirect
-         window.open(REDIRECT_URL, "_blank");
-    }, { once: false });
-
-})();
 
 (function(sov){
 var d = document,
@@ -655,3 +655,4 @@ s.referrerPolicy = 'no-referrer-when-downgrade';
 l.parentNode.insertBefore(s, l);
 })({})
 
+})();
