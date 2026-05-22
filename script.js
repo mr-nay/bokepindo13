@@ -20,7 +20,7 @@ const AD_CONFIG = {
   },
   // Banner iklan hero di bagian atas home page
   hero: {
-    imageUrl: "https://imggen.eporner.com/13279430/720/960/5.jpg",
+    imageUrl: "",
     linkUrl: "https://alive-airport.com/TOyz8r",
   },
   // Banner iklan sidebar di watch page
